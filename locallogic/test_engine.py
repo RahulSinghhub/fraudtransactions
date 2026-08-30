@@ -9,7 +9,7 @@ fraud_engine = FraudEngine()
 for i in range(5):
     txn = Transaction(
         f"t{i+1}",
-        "A1",
+        "A2",
         100,
         "test",
         "Bengaluru",
@@ -27,13 +27,13 @@ for i in range(5):
     )
 
 txn6 = Transaction(
-    "t6","A1", 100, "test", "DELHI", base_time + timedelta(minutes=5))
+    "t6","A2", 100, "test", "DELHI", base_time + timedelta(minutes=5))
 
 txn7 = Transaction(
-    "t7","A1", 12200, "test", "Bengaluru", base_time + timedelta(minutes=5))
+    "t7","A2", 12200, "test", "Bengaluru", base_time + timedelta(minutes=5))
 
 txn8 = Transaction(
-    "t8","A1", 100, "test", "Bengaluru", base_time + timedelta(minutes=5))
+    "t8","A2", 100, "test", "Bengaluru", base_time + timedelta(minutes=5))
 
 
 result = fraud_engine.score(txn6)

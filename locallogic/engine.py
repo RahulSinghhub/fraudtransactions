@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from account_profile import AccountProfile
+from dynamo_account_profile import DynamoAccountProfile
 from transaction import Transaction
 from rules import ALL_RULES
 
@@ -13,7 +13,7 @@ class ScoreResult:
 class FraudEngine:
 
     def __init__(self):
-        self.profile = AccountProfile()
+        self.profile = DynamoAccountProfile()
 
     def score(self, txn: Transaction, now = None):
         if now is None:
