@@ -9,12 +9,15 @@ class DynamoAccountProfile:
         self.tablename = dynamodb.Table(table_name)
     
 
-    def record(self, txn: Transaction):
-        self.tablename.put_item(Item = {
-            'account_id': txn.account_id,
-            'timestamp': txn.timestamp.isoformat(),
-            'amount': txn.amount,
-            'city': txn.city
+    def record(self, txn: Transaction, score=None, verdict=None, reasons=None):
+        self.tablename.put_item(Item={
+        'account_id': txn.account_id,
+        'timestamp': txn.timestamp.isoformat(),
+        'amount': txn.amount,
+        'city': txn.city,
+        'score': score,
+        'verdict': verdict,
+        'reasons': reasons
         })
 
     def _get_recent(self, account_id, limit=20):

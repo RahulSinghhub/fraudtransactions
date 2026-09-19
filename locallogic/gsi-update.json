@@ -1,0 +1,12 @@
+[
+    {
+        "Create": {
+            "IndexName": "verdict-timestamp-index",
+            "KeySchema": [
+                {"AttributeName": "verdict", "KeyType": "HASH"},
+                {"AttributeName": "timestamp", "KeyType": "RANGE"}
+            ],
+            "Projection": {"ProjectionType": "ALL"}
+        }
+    }
+]

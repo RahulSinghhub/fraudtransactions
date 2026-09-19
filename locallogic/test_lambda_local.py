@@ -6,10 +6,10 @@ from lambda_function import lambda_handler
 # Build a fake transaction, same as producer.py would send
 txn_dict = {
     'txn_id': 'tl1',
-    'account_id': 'A3',
+    'account_id': 'A7',
     'amount': 500,
     'merchant_category': 'grocery',
-    'city': 'Bengaluru',
+    'city': 'delhi',
     'timestamp': datetime.now().isoformat()
 }
 
@@ -21,7 +21,7 @@ fake_event = {
         {
             'kinesis': {
                 'data': encoded_data,
-                'partitionKey': 'A3'
+                'partitionKey': 'A7'
             }
         }
     ]

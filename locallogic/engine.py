@@ -31,6 +31,11 @@ class FraudEngine:
 
         verdict = "BLOCK" if score >= 60 else "REVIEW" if score >= 30 else "APPROVE"
 
-        self.profile.record(txn)
+        self.profile.record(
+            txn,
+            score=score,
+            verdict=verdict,
+            reasons=reasons
+        )
 
         return ScoreResult(txn_id = txn.txn_id, score = score, verdict = verdict, reasons = reasons)
