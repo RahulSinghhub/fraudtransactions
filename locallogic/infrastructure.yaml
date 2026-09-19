@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Fraud detection pipeline infrastructure
+
+Resources:
+  FraudTxnStream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      Name: fraud-txn-stream-test
+      StreamModeDetails:
+        StreamMode: ON_DEMAND
+
+  FraudTransactionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: fraud-transactions-test
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: account_id
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: S
+        - AttributeName: verdict
+          AttributeType: S
+      KeySchema:
+        # account_id as HASH, timestamp as RANGE - same as before
+        - AttributeName: account_id
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        # your verdict-timestamp-index, same key schema as the GSI update you ran
+        # each GSI entry also needs its own Projection
+        - IndexName: verdict-timestamp-index
+          KeySchema:
+            - AttributeName: verdict
+              KeyType: HASH
+            - AttributeName: timestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
